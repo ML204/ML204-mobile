@@ -1,0 +1,16 @@
+node_modules/
+out/
+.DS_Store
+*.log
+
+# Android builds
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/.idea/
+android/*.iml
+android/app/*.iml
+
+# Allow release keystore for CI builds
+!android/ml204-release.keystore
