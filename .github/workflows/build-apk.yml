@@ -1,0 +1,78 @@
+name: Build & Release Android APK
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      web_tag:
+        description: 'Web build tag from ML204/ML204 (leave blank for latest)'
+        required: false
+        default: 'latest'
+  repository_dispatch:
+    types: [web_release]
+
+permissions:
+  contents: write
+
+jobs:
+  build-apk:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Set up Java JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Node Dependencies
+        run: npm ci
+
+      - name: Download & Extract Web Build
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          WEB_TAG="${{ github.event.inputs.web_tag || github.event.client_payload.tag || 'latest' }}"
+          node scripts/sync-web-build.mjs --release "$WEB_TAG"
+
+      - name: Sync Capacitor Android Assets
+        run: |
+          npx cap copy android
+          node scripts/prune-android-resources.mjs
+
+      - name: Build Signed Release APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleRelease --stacktrace
+
+      - name: Upload APK as Workflow Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ml204-release-apk
+          path: android/app/build/outputs/apk/release/app-release.apk
+
+      - name: Publish GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: android/app/build/outputs/apk/release/app-release.apk
+          name: ML204 Android ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
