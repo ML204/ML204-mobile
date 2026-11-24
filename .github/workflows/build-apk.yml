@@ -49,7 +49,7 @@ jobs:
 
       - name: Sync Capacitor Android Assets
         run: |
-          npx cap copy android
+          npx cap sync android
           node scripts/prune-android-resources.mjs
 
       - name: Build Signed Release APK
