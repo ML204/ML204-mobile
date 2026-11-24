@@ -1,6 +1,6 @@
 {
   "name": "ml204-mobile",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Native Android & Mobile application shell for ML204",
   "private": true,
   "scripts": {

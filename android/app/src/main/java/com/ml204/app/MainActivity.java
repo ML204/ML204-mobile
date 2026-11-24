@@ -135,10 +135,9 @@ public class MainActivity extends BridgeActivity {
                                     || (localUriString != null && localUriString.toLowerCase().endsWith(".apk"));
 
                             if (isApk) {
-                                Uri contentUri = resolveApkContentUri(dm, downloadId, localUriString, title);
-                                if (contentUri != null) {
-                                    promptApkInstall(contentUri);
-                                }
+                                runOnUiThread(() ->
+                                    Toast.makeText(MainActivity.this, "Download complete: " + (title.isEmpty() ? "Update APK" : title) + ". Check notification or Downloads to install.", Toast.LENGTH_LONG).show()
+                                );
                             }
                         }
                     }
@@ -216,13 +215,6 @@ public class MainActivity extends BridgeActivity {
     @Override
     public void onResume() {
         super.onResume();
-        if (pendingInstallUri != null) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O || getPackageManager().canRequestPackageInstalls()) {
-                Uri toInstall = pendingInstallUri;
-                pendingInstallUri = null;
-                promptApkInstall(toInstall);
-            }
-        }
     }
 
     @Override
