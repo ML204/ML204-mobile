@@ -1,0 +1,30 @@
+{
+  "name": "ml204-mobile",
+  "version": "1.0.2",
+  "description": "Native Android & Mobile application shell for ML204",
+  "private": true,
+  "scripts": {
+    "sync:local": "node scripts/sync-web-build.mjs --local && npx cap copy android && node scripts/prune-android-resources.mjs",
+    "sync:release": "node scripts/sync-web-build.mjs --release && npx cap copy android && node scripts/prune-android-resources.mjs",
+    "cap:sync": "npx cap sync android && node scripts/prune-android-resources.mjs",
+    "prune:android": "node scripts/prune-android-resources.mjs",
+    "build:apk": "cd android && ./gradlew assembleRelease",
+    "build:bundle": "cd android && ./gradlew bundleRelease",
+    "open:android": "npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/browser": "^8.0.5",
+    "@capacitor/core": "^8.6.2",
+    "@capacitor/network": "^8.0.1",
+    "@capacitor/preferences": "^8.0.1",
+    "@capacitor/share": "^8.0.3",
+    "@capacitor/splash-screen": "^8.0.2",
+    "@capacitor/status-bar": "^8.0.4"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^8.6.2",
+    "@capacitor/cli": "^8.6.2",
+    "typescript": "^5"
+  }
+}
