@@ -55,7 +55,7 @@ captures/
 # Keystore files
 *.jks
 *.keystore
-!ml204-release.keystore
+!mltheta-release.keystore
 
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
@@ -100,3 +100,4 @@ app/src/main/assets/public
 app/src/main/assets/capacitor.config.json
 app/src/main/assets/capacitor.plugins.json
 app/src/main/res/xml/config.xml
+!ml204-release.keystore

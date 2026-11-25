@@ -29,7 +29,7 @@ npm install
 ```
 
 ### 3. Sync from Local Web Build
-If you have the web repo cloned side-by-side (`../mltheta` or `../ml204`):
+If you have the web repo cloned side-by-side (`../mltheta`):
 ```bash
 # 1. Build the web app in the web repo
 cd ../mltheta && npm run build
@@ -56,7 +56,7 @@ npm run open:android
 
 | Command | Description |
 | :--- | :--- |
-| `npm run sync:local` | Copies web build from `../ml204/out` -> `./out` and updates Android assets |
+| `npm run sync:local` | Copies web build from `../mltheta/out` -> `./out` and updates Android assets |
 | `npm run sync:release` | Downloads latest `web-build.zip` from `mltheta/mltheta` GitHub releases |
 | `npm run cap:sync` | Syncs Capacitor native configuration and plugins |
 | `npm run prune:android` | Prunes heavy non-essential offline binaries to keep APK size minimal (<15 MB) |

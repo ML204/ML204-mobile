@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace = "com.ml204.app"
+    namespace = "com.mltheta.app"
     compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.ml204.app"
+        applicationId "com.mltheta.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 4
@@ -18,10 +18,10 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file("${rootDir}/ml204-release.keystore")
-            storePassword 'ml204pass'
-            keyAlias 'ml204'
-            keyPassword 'ml204pass'
+            storeFile file("${rootDir}/mltheta-release.keystore")
+            storePassword 'mlthetapass'
+            keyAlias 'mltheta'
+            keyPassword 'mlthetapass'
         }
     }
     buildTypes {
