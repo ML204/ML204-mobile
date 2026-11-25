@@ -83,7 +83,7 @@ function pruneDir(dirPath) {
   }
 }
 
-console.log('\n📦 [ML204 Asset Optimizer] Pruning heavy resources from Android APK bundle...');
+console.log('\n📦 [MLTheta Asset Optimizer] Pruning heavy resources from Android APK bundle...');
 
 if (fs.existsSync(androidAssetsResources)) {
   pruneDir(androidAssetsResources);

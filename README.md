@@ -1,8 +1,8 @@
-# ML204 Mobile (Android Shell)
+# MLTheta Mobile (Android Shell)
 
 This repository contains the native Android application shell, Capacitor runtime, and CI/CD pipelines for **ML204**.
 
-The core textbook content, MDX interactive lessons, and React web application are maintained in the main repository: [**ML204/ML204**](https://github.com/ML204/ML204).
+The core textbook content, MDX interactive lessons, and React web application are maintained in the main repository: [**mltheta/mltheta**](https://github.com/mltheta/mltheta).
 
 ---
 
@@ -10,7 +10,7 @@ The core textbook content, MDX interactive lessons, and React web application ar
 
 1. **Static Web Bundle**: Next.js exports static HTML, CSS, JavaScript, and data assets into an `out/` bundle.
 2. **Capacitor Android Container**: Capacitor wraps the static bundle inside an Android WebView with native plugins (`@capacitor/network`, `@capacitor/preferences`, `@capacitor/share`, etc.) for offline access and native device features.
-3. **Automated CI/CD**: When a new release tag (e.g. `v1.0.3`) is published on `ML204/ML204`, GitHub Actions in this repo fetches the release's `web-build.zip`, syncs it to Android assets, compiles the signed release APK, and publishes it.
+3. **Automated CI/CD**: When a new release tag (e.g. `v1.0.3`) is published on `mltheta/mltheta`, GitHub Actions in this repo fetches the release's `web-build.zip`, syncs it to Android assets, compiles the signed release APK, and publishes it.
 
 ---
 
@@ -23,8 +23,8 @@ The core textbook content, MDX interactive lessons, and React web application ar
 
 ### 2. Setup
 ```bash
-git clone https://github.com/ML204/ML204-mobile.git
-cd ML204-mobile
+git clone https://github.com/mltheta/mltheta-mobile.git
+cd mltheta-mobile
 npm install
 ```
 
@@ -57,7 +57,7 @@ npm run open:android
 | Command | Description |
 | :--- | :--- |
 | `npm run sync:local` | Copies web build from `../ml204/out` -> `./out` and updates Android assets |
-| `npm run sync:release` | Downloads latest `web-build.zip` from `ML204/ML204` GitHub releases |
+| `npm run sync:release` | Downloads latest `web-build.zip` from `mltheta/mltheta` GitHub releases |
 | `npm run cap:sync` | Syncs Capacitor native configuration and plugins |
 | `npm run prune:android` | Prunes heavy non-essential offline binaries to keep APK size minimal (<15 MB) |
 | `npm run build:apk` | Runs Gradle to assemble the signed release APK |

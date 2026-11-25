@@ -1,7 +1,7 @@
 {
-  "name": "ml204-mobile",
+  "name": "mltheta-mobile",
   "version": "1.0.3",
-  "description": "Native Android & Mobile application shell for ML204",
+  "description": "Native Android & Mobile application shell for MLTheta",
   "private": true,
   "scripts": {
     "sync:local": "node scripts/sync-web-build.mjs --local && npx cap copy android && node scripts/prune-android-resources.mjs",

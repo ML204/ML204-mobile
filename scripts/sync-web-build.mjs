@@ -28,16 +28,16 @@ async function main() {
     return;
   }
 
-  // Release mode: fetch web-build.zip from GitHub Release of ML204/ML204
+  // Release mode: fetch web-build.zip from GitHub Release of mltheta/mltheta
   const tag = args.find((a) => !a.startsWith('--')) || 'latest';
-  console.log(`🌐 Fetching web build release asset for tag "${tag}" from ML204/ML204...`);
+  console.log(`🌐 Fetching web build release asset for tag "${tag}" from mltheta/mltheta...`);
 
   const zipPath = path.join(rootDir, 'web-build.zip');
   try {
     if (tag === 'latest') {
-      execSync(`gh release download --repo ML204/ML204 --pattern "web-build.zip" --dir "${rootDir}" --clobber`, { stdio: 'inherit' });
+      execSync(`gh release download --repo mltheta/mltheta --pattern "web-build.zip" --dir "${rootDir}" --clobber`, { stdio: 'inherit' });
     } else {
-      execSync(`gh release download "${tag}" --repo ML204/ML204 --pattern "web-build.zip" --dir "${rootDir}" --clobber`, { stdio: 'inherit' });
+      execSync(`gh release download "${tag}" --repo mltheta/mltheta --pattern "web-build.zip" --dir "${rootDir}" --clobber`, { stdio: 'inherit' });
     }
     console.log(`📦 Unzipping ${zipPath} into ${outDir}...`);
     fs.rmSync(outDir, { recursive: true, force: true });

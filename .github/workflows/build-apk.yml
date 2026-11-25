@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       web_tag:
-        description: 'Web build tag from ML204/ML204 (leave blank for latest)'
+        description: 'Web build tag from mltheta/mltheta (leave blank for latest)'
         required: false
         default: 'latest'
   repository_dispatch:
@@ -69,7 +69,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: android/app/build/outputs/apk/release/app-release.apk
-          name: ML204 Android ${{ github.ref_name }}
+          name: MLTheta Android ${{ github.ref_name }}
           draft: false
           prerelease: false
           generate_release_notes: true
