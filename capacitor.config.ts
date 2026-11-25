@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.ml204.app',
+  appId: 'com.mltheta.app',
   appName: 'MLTheta',
   webDir: 'out',
   server: {

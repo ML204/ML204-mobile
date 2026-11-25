@@ -13,4 +13,5 @@ android/*.iml
 android/app/*.iml
 
 # Allow release keystore for CI builds
+!android/mltheta-release.keystore
 !android/ml204-release.keystore
