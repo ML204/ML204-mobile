@@ -1,6 +1,6 @@
 # MLTheta Mobile (Android Shell)
 
-This repository contains the native Android application shell, Capacitor runtime, and CI/CD pipelines for **ML204**.
+This repository contains the native Android application shell, Capacitor runtime, and CI/CD pipelines for **MLTheta**.
 
 The core textbook content, MDX interactive lessons, and React web application are maintained in the main repository: [**mltheta/mltheta**](https://github.com/mltheta/mltheta).
 
@@ -29,13 +29,13 @@ npm install
 ```
 
 ### 3. Sync from Local Web Build
-If you have the web repo cloned side-by-side (`../ml204`):
+If you have the web repo cloned side-by-side (`../mltheta` or `../ml204`):
 ```bash
 # 1. Build the web app in the web repo
-cd ../ml204 && npm run build
+cd ../mltheta && npm run build
 
 # 2. Sync to mobile and prune heavy binary assets
-cd ../ml204-mobile && npm run sync:local
+cd ../mltheta-mobile && npm run sync:local
 ```
 
 ### 4. Build Signed Release APK

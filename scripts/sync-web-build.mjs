@@ -12,11 +12,13 @@ const outDir = path.join(rootDir, 'out');
 
 const args = process.argv.slice(2);
 const isRelease = args.includes('--release');
-const isLocal = args.includes('--local') || (!isRelease && fs.existsSync(path.resolve(rootDir, '../ml204/out')));
+const localWebOut = fs.existsSync(path.resolve(rootDir, '../mltheta/out')) 
+  ? path.resolve(rootDir, '../mltheta/out') 
+  : path.resolve(rootDir, '../ml204/out');
+const isLocal = args.includes('--local') || (!isRelease && fs.existsSync(localWebOut));
 
 async function main() {
   if (isLocal) {
-    const localWebOut = path.resolve(rootDir, '../ml204/out');
     if (!fs.existsSync(localWebOut)) {
       console.error(`❌ Local web build not found at ${localWebOut}. Run "npm run build" in the web repository first.`);
       process.exit(1);
