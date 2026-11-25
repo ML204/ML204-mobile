@@ -61,7 +61,7 @@ jobs:
       - name: Upload APK as Workflow Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ml204-release-apk
+          name: mltheta-release-apk
           path: android/app/build/outputs/apk/release/app-release.apk
 
       - name: Publish GitHub Release

@@ -192,7 +192,7 @@ public class MainActivity extends BridgeActivity {
             try {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !getPackageManager().canRequestPackageInstalls()) {
                     pendingInstallUri = contentUri;
-                    Toast.makeText(this, "Please allow ML204 to install app updates", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Please allow MLTheta to install app updates", Toast.LENGTH_LONG).show();
                     Intent settingsIntent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES);
                     settingsIntent.setData(Uri.parse("package:" + getPackageName()));
                     settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
