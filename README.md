@@ -10,7 +10,7 @@ The core textbook content, MDX interactive lessons, and React web application ar
 
 1. **Static Web Bundle**: Next.js exports static HTML, CSS, JavaScript, and data assets into an `out/` bundle.
 2. **Capacitor Android Container**: Capacitor wraps the static bundle inside an Android WebView with native plugins (`@capacitor/network`, `@capacitor/preferences`, `@capacitor/share`, etc.) for offline access and native device features.
-3. **Automated CI/CD**: When a new release tag (e.g. `v2.0.0`) is published on `mltheta/mltheta`, GitHub Actions in this repo fetches the release's `web-build.zip`, syncs it to Android assets, compiles the signed release APK, and publishes it.
+3. **Automated CI/CD**: When a new release tag (e.g. `v2.1.0`) is published on `mltheta/mltheta`, GitHub Actions in this repo fetches the release's `web-build.zip`, syncs it to Android assets, compiles the signed release APK, and publishes it.
 
 ---
 
