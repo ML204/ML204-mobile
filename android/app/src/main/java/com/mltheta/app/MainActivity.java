@@ -10,20 +10,16 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.Settings;
 import android.webkit.CookieManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.URLUtil;
 import android.webkit.WebView;
 import android.widget.Toast;
-import androidx.core.content.FileProvider;
 import com.getcapacitor.BridgeActivity;
-import java.io.File;
 
 public class MainActivity extends BridgeActivity {
 
     private BroadcastReceiver downloadReceiver;
-    private Uri pendingInstallUri = null;
     private static long lastApkDownloadId = -1;
 
     public static class AndroidDownloaderInterface {
@@ -97,7 +93,7 @@ public class MainActivity extends BridgeActivity {
             downloader.downloadFile(url, filename, mimetype);
         });
 
-        // Register receiver for automatic APK update installation
+        // Register receiver to notify when APK update downloads finish
         registerDownloadReceiver();
     }
 
@@ -157,64 +153,6 @@ public class MainActivity extends BridgeActivity {
         } else {
             registerReceiver(downloadReceiver, filter);
         }
-    }
-
-    private Uri resolveApkContentUri(DownloadManager dm, long downloadId, String localUriString, String title) {
-        try {
-            File apkFile = null;
-            if (localUriString != null && localUriString.startsWith("file://")) {
-                apkFile = new File(Uri.parse(localUriString).getPath());
-            }
-
-            if (apkFile == null || !apkFile.exists()) {
-                if (title != null && !title.isEmpty()) {
-                    File candidate = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), title);
-                    if (candidate.exists()) {
-                        apkFile = candidate;
-                    }
-                }
-            }
-
-            if (apkFile != null && apkFile.exists()) {
-                return FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", apkFile);
-            }
-        } catch (Exception ignored) {}
-
-        try {
-            return dm.getUriForDownloadedFile(downloadId);
-        } catch (Exception ignored) {
-            return null;
-        }
-    }
-
-    private void promptApkInstall(Uri contentUri) {
-        runOnUiThread(() -> {
-            try {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !getPackageManager().canRequestPackageInstalls()) {
-                    pendingInstallUri = contentUri;
-                    Toast.makeText(this, "Please allow MLTheta to install app updates", Toast.LENGTH_LONG).show();
-                    Intent settingsIntent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES);
-                    settingsIntent.setData(Uri.parse("package:" + getPackageName()));
-                    settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(settingsIntent);
-                    return;
-                }
-
-                Intent installIntent = new Intent(Intent.ACTION_VIEW);
-                installIntent.setDataAndType(contentUri, "application/vnd.android.package-archive");
-                installIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                installIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                installIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(installIntent);
-            } catch (Exception e) {
-                Toast.makeText(this, "Could not open installer: " + e.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     @Override
